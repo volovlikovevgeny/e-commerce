@@ -1,7 +1,10 @@
-.homepage{
+.sign-up {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px 80px;
+    width: 380px;
     border: 1px solid black;
-}
+  
+    .title {
+      margin: 10px 0;
+    }
+  }

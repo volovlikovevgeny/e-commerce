@@ -4,6 +4,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      
+      
 
 
       .image{
@@ -12,6 +14,7 @@
           background-size:cover;
           background-position: center;
           margin-bottom: 5px;
+          position: relative;
       }
       
       .collection-footer{
