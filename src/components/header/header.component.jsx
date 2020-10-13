@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import CartIcon from '../shop-icon/shop-icon.component';
+import CartDropDown from '../cart-dropdown/cart-dropdown.component';
 
 import { auth } from '../../firebase/firebase.utils';
 
@@ -28,6 +29,7 @@ const Header = ({ currentUser }) => {
                     )}
                 <CartIcon />
             </div>
+            <CartDropDown />
         </div>
     )
 }
