@@ -1,6 +1,7 @@
 body{
     font-family: 'Akronim', cursive;
     padding: 20px 40px;
+    border: 1px solid black;
 }
 
 *{

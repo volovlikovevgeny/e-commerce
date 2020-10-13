@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 
 import './header.styles.scss';
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, hidden }) => {
     console.log(currentUser);
     return (
         <div className='header'>
@@ -29,14 +29,18 @@ const Header = ({ currentUser }) => {
                     )}
                 <CartIcon />
             </div>
-            <CartDropDown />
+            {
+                hidden ? null : <CartDropDown />
+            }
+
         </div>
     )
 }
 
 
 const mapStatetoProps = state => ({
-    currentUser: state.user.currentUser
+    currentUser: state.user.currentUser,
+    hidden: state.cart.hidden
 })
 
 export default connect(mapStatetoProps)(Header);
