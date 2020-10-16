@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ReactComponent as Logo } from '../../assets/crown.svg';
+import { ReactComponent as Logo } from '../../assets/dragon.svg';
 import CartIcon from '../shop-icon/shop-icon.component';
 import CartDropDown from '../cart-dropdown/cart-dropdown.component';
 
@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 import './header.styles.scss';
 
 const Header = ({ currentUser, hidden }) => {
-    console.log(currentUser);
     return (
         <div className='header'>
             <Link className='logo-container' to='/' >
@@ -19,7 +18,8 @@ const Header = ({ currentUser, hidden }) => {
             </Link>
             <div className='options'>
                 <Link className='option' to='/shoppage'>SHOP</Link>
-                <Link className='option' to='/shoppage'>CONTACT</Link>
+                <Link className='option' to='/contacts'>CONTACT</Link>
+
                 {currentUser ? (
                     <div className='option' onClick={() => auth.signOut()}>
                         SIGN OUT
@@ -38,9 +38,9 @@ const Header = ({ currentUser, hidden }) => {
 }
 
 
-const mapStatetoProps = state => ({
-    currentUser: state.user.currentUser,
-    hidden: state.cart.hidden
-})
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+    currentUser,
+    hidden
+});
 
-export default connect(mapStatetoProps)(Header);
+export default connect(mapStateToProps)(Header);

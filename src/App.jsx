@@ -5,10 +5,15 @@ import Homepage from './pages/homepage/homepage.component';
 import Shoppage from './pages/shoppage/shoppage.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up.component/sign-in-and-sign-up.component';
 
+import MapBox from './components/mapbox/mapbox.component'
 
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
+
+
+import Particles from 'react-particles-js';
+
 
 
 import './App.css';
@@ -47,10 +52,25 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <Particles
+          className='particles'
+          params={{
+            particles: {
+              line_linked: {
+                shadow: {
+                  enable: true,
+                  color: "#3CA9D1",
+                  blur: 1
+                }
+              }
+            }
+          }} />
         <Header />
         <Switch>
           <Route exact path='/' component={Homepage} />
           <Route path='/shoppage' component={Shoppage} />
+          <Route path='/contacts' component={MapBox} />
+
           <Route
             exact
             path='/signin'

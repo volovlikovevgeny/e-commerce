@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.502631,
+                    55.856485
+                ]
+            },
+            "properties": {
+                "id": 1,
+                "title": "E-commerce",
+                "description": "Lyapidevskogo, 4",
+                "mail": "Volovlikov97@gmail.com",
+                "contacts": "89772850561"
+            }
+        }
+    ]
+}
