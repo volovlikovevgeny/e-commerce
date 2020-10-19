@@ -4,15 +4,19 @@ import Header from './components/header/header.component';
 import Homepage from './pages/homepage/homepage.component';
 import Shoppage from './pages/shoppage/shoppage.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up.component/sign-in-and-sign-up.component';
+import CheckoutPage from './pages/checkpage/checkout.component';
 
 import MapBox from './components/mapbox/mapbox.component'
 
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
+import { selectCurrentUser } from './redux/user/user.selectors';
+import { createStructuredSelector } from 'reselect'
+
 import { setCurrentUser } from './redux/user/user.actions';
 
 
-import Particles from 'react-particles-js';
+// import Particles from 'react-particles-js';
 
 
 
@@ -52,7 +56,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Particles
+        {/* <Particles
           className='particles'
           params={{
             particles: {
@@ -64,12 +68,13 @@ class App extends React.Component {
                 }
               }
             }
-          }} />
+          }} /> */}
         <Header />
         <Switch>
           <Route exact path='/' component={Homepage} />
           <Route path='/shoppage' component={Shoppage} />
           <Route path='/contacts' component={MapBox} />
+          <Route exact path='/checkout' component={CheckoutPage} />
 
           <Route
             exact
@@ -85,8 +90,8 @@ class App extends React.Component {
 }
 
 
-const mapStateToprops = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -94,4 +99,4 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-export default connect(mapStateToprops, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

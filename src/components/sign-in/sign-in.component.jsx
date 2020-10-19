@@ -8,6 +8,9 @@ import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 import './sign-in.styles.scss';
 
 class SignIn extends React.Component {
+
+    userSignInData
+
     constructor(props) {
         super(props);
 
@@ -22,7 +25,6 @@ class SignIn extends React.Component {
 
         const { email, password } = this.state;
 
-
         try {
             await auth.signInWithEmailAndPassword(email, password);
             this.setState({
@@ -32,16 +34,30 @@ class SignIn extends React.Component {
         } catch (error) {
             console.log('error logging user', error.message);
         }
-
-
-
     };
+
+    componentDidMount() {
+        this.userData = JSON.parse(localStorage.getItem('user'));
+
+        if (localStorage.getItem('user')) {
+            this.setState({
+                email: this.userData.email,
+                password: this.userData.password
+            })
+        }
+    }
+
+    componentDidUpdate(nextProps, nextState) {
+        localStorage.setItem('user', JSON.stringify(nextState))
+    }
 
     handleChange = event => {
         const { value, name } = event.target;
 
         this.setState({ [name]: value });
     };
+
+
 
     render() {
         return (

@@ -7,6 +7,10 @@ import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import './sign-up.styles.scss';
 
 class SignUp extends React.Component {
+
+    userData
+
+
     constructor() {
         super();
 
@@ -16,6 +20,25 @@ class SignUp extends React.Component {
             password: '',
             confirmPassword: ''
         };
+    }
+
+
+
+    componentDidMount() {
+        this.userData = JSON.parse(localStorage.getItem('signUpData'));
+
+        if (localStorage.getItem('signUpData')) {
+            this.setState({
+                displayName: this.userData.displayName,
+                email: this.userData.email,
+                password: this.userData.password,
+                confirmPassword: this.userData.confirmPassword
+            })
+        }
+    }
+
+    componentDidUpdate(nextProps, nextState) {
+        localStorage.setItem('signUpData', JSON.stringify(nextState))
     }
 
 
@@ -47,8 +70,8 @@ class SignUp extends React.Component {
         } catch (error) {
             console.log(error);
         }
-
     }
+
 
     handleChange = (event) => {
         const { value, name } = event.target;
