@@ -1,5 +1,5 @@
 import React from 'react';
-import './directory.styles.scss';
+import { DirectoryMenuContainer } from './directory.styles';
 
 import { connect } from 'react-redux';
 
@@ -12,12 +12,12 @@ import MenuItem from '../menu-item/menu-item.component';
 
 const Directory = ({ sections }) => {
     return (
-        <div className='directory-menu'>
+        <DirectoryMenuContainer>
             {
                 sections.map(({ id, ...otherProps }) =>
                     <MenuItem key={id} {...otherProps} />)
             }
-        </div>
+        </DirectoryMenuContainer>
     )
 }
 

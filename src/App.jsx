@@ -5,10 +5,11 @@ import Homepage from './pages/homepage/homepage.component';
 import Shoppage from './pages/shoppage/shoppage.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up.component/sign-in-and-sign-up.component';
 import CheckoutPage from './pages/checkpage/checkout.component';
-
 import MapBox from './components/mapbox/mapbox.component'
 
-import { Switch, Route, Redirect } from 'react-router-dom'
+
+
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect'
@@ -16,11 +17,8 @@ import { createStructuredSelector } from 'reselect'
 import { setCurrentUser } from './redux/user/user.actions';
 
 
-// import Particles from 'react-particles-js';
+import { GlobalStyle } from './global.styles';
 
-
-
-import './App.css';
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
@@ -56,19 +54,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {/* <Particles
-          className='particles'
-          params={{
-            particles: {
-              line_linked: {
-                shadow: {
-                  enable: true,
-                  color: "#3CA9D1",
-                  blur: 1
-                }
-              }
-            }
-          }} /> */}
+        <GlobalStyle />
         <Header />
         <Switch>
           <Route exact path='/' component={Homepage} />

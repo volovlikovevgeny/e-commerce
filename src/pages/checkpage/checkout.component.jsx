@@ -12,7 +12,7 @@ import StripeCheckoutButton from '../../components/stripe-button/stripe-button.c
 
 function CheckoutPage({ cartItems, total }) {
     return (
-        <div style={{ border: '1px solid black' }} className='checkout-page'>
+        <div className='checkout-page'>
             <div className='checkout-header'>
                 <div className='header-block'>
                     <span>Product</span>

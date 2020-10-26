@@ -1,5 +1,5 @@
 .checkout-page {
-  width: 55%;
+  width: 60%;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
@@ -20,6 +20,11 @@
 
       &:last-child {
         width: 8%;
+
+        @media(max-width:561px){
+          padding-right: 35px;
+      
+        }
       }
     }
   }
@@ -42,5 +47,12 @@
     margin-top: 40px;
     font-size: 24px;
   }
+
+  @media(max-width:800px){
+    width: 90%;
+
+  }
+
   
+
 }
