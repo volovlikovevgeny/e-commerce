@@ -6,7 +6,6 @@ export const CartDropDownContainer = styled.div`
     position: absolute;
     width: 250px;
     height: 340px;
-  
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -21,7 +20,7 @@ export const CartItemsContainer = styled.div`
     height: 250px;
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    overflow: scroll;
  
 `
 
