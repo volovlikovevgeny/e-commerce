@@ -1,71 +1,75 @@
-import React, { useState } from 'react';
-import ReactMapGl, { Marker, Popup } from 'react-map-gl';
-import * as Data from './data.json';
+import React from 'react';
 import './mapbox.styles.scss';
 
-const MapBox = () => {
+import mapboxgl from 'mapbox-gl';
 
-    const [viewport, setViewport] = useState({
-        width: '100%',
-        height: '80vh',
-        latitude: 55.856485,
-        longitude: 37.502631,
-        zoom: 12
-    })
+mapboxgl.accessToken = 'pk.eyJ1IjoiZXZnZW55cXdlIiwiYSI6ImNrZ3F6b3p4MTBxajEzMGw4bHk1dHllZTkifQ.c2fxVlwO2Lw6OyxVi9UMgg'
 
-    const [selectShop, setSelectedPark] = useState(null)
+class MapBox extends React.Component {
 
-    let token = 'pk.eyJ1IjoiZXZnZW55cXdlIiwiYSI6ImNrZzByOXN3ZTB5aTIycnFmeHFxMHplMHgifQ.uO59eh5EzNq3QgdSggQ3YA'
+    constructor(props) {
+        super(props);
+        this.state = {
+            lng: 5,
+            lat: 34,
+            zoom: 2
+        };
+    }
 
-    return (
-        <div className='mapContainer'>
-            <ReactMapGl
-                {...viewport}
-                mapboxApiAccessToken={token}
-                mapStyle='mapbox://styles/evgenyqwe/ckg0sbl952cri1alpf9g9hq54'
-                onViewportChange={viewport => {
-                    setViewport(viewport)
-                }}>
-                {
-                    Data.features.map((park) => (
-                        <Marker
-                            key={park.properties.id}
-                            latitude={park.geometry.coordinates[1]}
-                            longitude={park.geometry.coordinates[0]}
-                        >
-                            <div
-                                className='marker-btn'
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setSelectedPark(park)
-                                }} >
-                                <img style={{ width: '30px', height: '30px' }} src='https://i.imgur.com/y0G5YTX.png' alt="GeoIcon" />
-                            </div>
-                        </Marker>
-                    ))
-                }
-                {selectShop ? (
-                    <Popup
-                        latitude={selectShop.geometry.coordinates[1]}
-                        longitude={selectShop.geometry.coordinates[0]}
-                        onClose={() => {
-                            setSelectedPark(null)
-                        }}
-                    >
-                        <div style={{ width: '180px', height: '150px', textAlign: 'center', fontFamily: 'Arial' }}>
-                            <h3 style={{ textAlign: 'center' }}>{selectShop.properties.title}</h3>
-                            <p>{selectShop.properties.description}</p>
-                            <p>{selectShop.properties.mail}</p>
-                            <p>{selectShop.properties.contacts}</p>
-                        </div>
-                    </Popup>
-                ) : null}
-            </ReactMapGl>
-        </div >
-    )
+    componentDidMount() {
+        const map = new mapboxgl.Map({
+            container: this.mapContainer,
+            style: 'mapbox://styles/evgenyqwe/ckgr4lxpy0rv519povr1aibxk',
+            center: [this.state.lng, this.state.lat],
+            zoom: this.state.zoom
+
+        });
+
+        map.on('move', () => {
+            this.setState({
+                lng: map.getCenter().lng.toFixed(4),
+                lat: map.getCenter().lat.toFixed(4),
+                zoom: map.getZoom().toFixed(2)
+            });
+        });
+    }
+
+    render() {
+        return (
+            <div className='contacts'>
+                <div className='contacts-container'>
+                    <div className='row'>
+                        <div className='head'>Name</div>
+                        <div className='head-contact'>Evgeny</div>
+                    </div>
+                    <div className='row'>
+                        <div className='head'>Address</div>
+                        <div className='head-contact'>Lyapidevskogo,4</div>
+                    </div>
+                    <div className='row'>
+                        <div className='head'>Email</div>
+                        <div className='head-contact'>Volovlikov97@gmail.com</div>
+                    </div>
+                    <div className='row'>
+                        <div className='head'>Phone</div>
+                        <div className='head-contact' > 8(977)-285-04-61</div>
+                    </div>
+
+                </div>
+
+                <div className='mapContainer' >
+                    <div style={{ height: '300px', width: '100%' }} ref={el => this.mapContainer = el} className='mapContainer' />
+                </div>
+            </div>
+
+
+
+
+        )
+    }
 }
 
 
-
 export default MapBox;
+
 

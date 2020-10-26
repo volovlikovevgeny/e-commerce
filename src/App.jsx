@@ -12,15 +12,15 @@ import MapBox from './components/mapbox/mapbox.component'
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { selectCurrentUser } from './redux/user/user.selectors';
-import { createStructuredSelector } from 'reselect'
+import { selectCollectionForPreview } from './redux/shop/shop.selectors';
+import { createStructuredSelector } from 'reselect';
 
 import { setCurrentUser } from './redux/user/user.actions';
-
-
 import { GlobalStyle } from './global.styles';
+import { auth, createUserProfileDocument, addCollectionAndDocument } from './firebase/firebase.utils';
 
 
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+
 
 class App extends React.Component {
 
@@ -29,7 +29,7 @@ class App extends React.Component {
 
   componentDidMount() {
 
-    const { setCurrentUser } = this.props
+    const { setCurrentUser, collectionArray } = this.props
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -44,6 +44,7 @@ class App extends React.Component {
       }
 
       setCurrentUser(userAuth);
+      addCollectionAndDocument('collection', collectionArray)
     });
   }
 
@@ -77,7 +78,8 @@ class App extends React.Component {
 
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  collectionArray: selectCollectionForPreview
 })
 
 const mapDispatchToProps = (dispatch) => ({
