@@ -28,7 +28,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     const snapShot = await userRef.get();
 
-    const collectionSnapShot = await collectionRef.get();
+    // const collectionSnapShot = await collectionRef.get();
 
 
 

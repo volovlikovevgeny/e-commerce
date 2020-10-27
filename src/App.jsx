@@ -39,12 +39,10 @@ class App extends React.Component {
           });
         });
       }
-
       setCurrentUser(userAuth);
       addCollectionAndDocument('collection', collectionArray)
     });
   }
-
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
@@ -55,7 +53,7 @@ class App extends React.Component {
         <GlobalStyle />
         <Header />
         <Switch>
-          <Suspense fallback={<div>Loading</div>}>
+          <Suspense fallback={<div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '2rem' }}>Loading</div>}>
             <Route exact path='/' component={HomePage} />
             <Route path='/shop' component={ShopPage} />
             <Route path='/contacts' component={MapBox} />
