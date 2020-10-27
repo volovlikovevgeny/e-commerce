@@ -34,6 +34,7 @@ class Shoppage extends React.Component {
             const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
             updateCollection(collectionsMap);
             this.setState({ loading: false })
+            console.log(this.state);
         })
     }
 
