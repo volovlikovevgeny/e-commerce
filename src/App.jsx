@@ -5,12 +5,11 @@ import Header from './components/header/header.component';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { selectCurrentUser } from './redux/user/user.selectors';
-import { selectCollectionForPreview } from './redux/shop/shop.selectors';
 import { createStructuredSelector } from 'reselect';
 
 import { setCurrentUser } from './redux/user/user.actions';
 import { GlobalStyle } from './global.styles';
-import { auth, createUserProfileDocument, addCollectionAndDocument } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument, } from './firebase/firebase.utils';
 
 
 const HomePage = lazy(() => import('./pages/homepage/homepage.component'));
@@ -21,12 +20,12 @@ const MapBox = lazy(() => import('./components/mapbox/mapbox.component'));
 
 class App extends React.Component {
 
-
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    console.log('Component Did Mount');
 
-    const { setCurrentUser, collectionArray } = this.props
+    const { setCurrentUser } = this.props
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -40,11 +39,11 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
-      addCollectionAndDocument('collection', collectionArray)
     });
   }
   componentWillUnmount() {
     this.unsubscribeFromAuth();
+    console.log('Component Did UnMount');
   }
 
   render() {
@@ -58,7 +57,6 @@ class App extends React.Component {
             <Route path='/shop' component={ShopPage} />
             <Route path='/contacts' component={MapBox} />
             <Route exact path='/checkout' component={CheckoutPage} />
-
             <Route
               exact
               path='/signin'
@@ -76,7 +74,6 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  collectionArray: selectCollectionForPreview
 })
 
 const mapDispatchToProps = (dispatch) => ({

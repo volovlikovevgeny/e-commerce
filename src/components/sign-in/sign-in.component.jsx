@@ -8,7 +8,6 @@ import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 import { SignInContainer, SignInTitle, ButtonsBarContainer } from './sign-in.styles';
 
 class SignIn extends React.Component {
-
     userSignInData
 
     constructor(props) {
@@ -17,7 +16,8 @@ class SignIn extends React.Component {
         this.state = {
             name: '',
             email: '',
-            password: ''
+            password: '',
+            jsonFetchReesponse: null
         };
     }
 
@@ -38,6 +38,12 @@ class SignIn extends React.Component {
     };
 
     componentDidMount() {
+
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(result => this.setState({ jsonFetchReesponse: result }))
+
+
         this.userData = JSON.parse(localStorage.getItem('user'));
 
         if (localStorage.getItem('user')) {
@@ -59,6 +65,7 @@ class SignIn extends React.Component {
     };
 
     render() {
+        console.log(this.state.jsonFetchReesponse);
         return (
             <SignInContainer className='sign-in'>
                 <SignInTitle>I already have an account</SignInTitle>
