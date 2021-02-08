@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const MenuItemContainer = styled.div`
   height: ${({ size }) => (size ? '380px' : '240px')};
-  border:1px solid black;
 	min-width: 30%;
 	overflow: hidden;
 	flex: 1 1 auto;
@@ -11,7 +10,7 @@ export const MenuItemContainer = styled.div`
 	justify-content: center;
 	margin: 0 7.5px 15px;
   overflow: hidden;
-  box-shadow:0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow:0 5px 15px rgba(0, 0, 0, 0.5);
 	&:hover {
 		cursor: pointer;
 		& .background-image {

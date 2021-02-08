@@ -23,8 +23,6 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    console.log('Component Did Mount');
-
     const { setCurrentUser } = this.props
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -43,7 +41,6 @@ class App extends React.Component {
   }
   componentWillUnmount() {
     this.unsubscribeFromAuth();
-    console.log('Component Did UnMount');
   }
 
   render() {
@@ -52,7 +49,7 @@ class App extends React.Component {
         <GlobalStyle />
         <Header />
         <Switch>
-          <Suspense fallback={<div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '2rem' }}>Loading</div>}>
+          <Suspense fallback>
             <Route exact path='/' component={HomePage} />
             <Route path='/shop' component={ShopPage} />
             <Route path='/contacts' component={MapBox} />

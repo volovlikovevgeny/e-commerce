@@ -18,19 +18,19 @@ import { OptionLink } from './header.styles';
 
 const Header = ({ currentUser, hidden }) => {
     return (
-        <HeaderContainer className='header'>
-            <LogoContainer className='logo-container' to='/' >
-                <Logo className='logo' />
+        <HeaderContainer>
+            <LogoContainer to='/' >
+                <Logo />
             </LogoContainer>
-            <OptionsContaner className='options'>
-                <OptionLink className='option' to='/shop'>SHOP</OptionLink>
-                <OptionLink className='option' to='/contacts'>CONTACT</OptionLink>
+            <OptionsContaner>
+                <OptionLink to='/shop'>SHOP</OptionLink>
+                <OptionLink to='/contacts'>CONTACT</OptionLink>
                 {currentUser ? (
-                    <OptionLink as='div' className='option' onClick={() => auth.signOut()}>
+                    <OptionLink as='div' onClick={() => auth.signOut()}>
                         SIGN OUT
                     </OptionLink>
                 ) : (
-                        <OptionLink className='option' to='/signin'>SIGN IN</OptionLink>
+                        <OptionLink to='/signin'>SIGN IN</OptionLink>
                     )}
                 <CartIcon />
             </OptionsContaner>
